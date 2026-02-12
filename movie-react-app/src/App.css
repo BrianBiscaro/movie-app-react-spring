@@ -1,0 +1,49 @@
+.main-content {
+  /* Layout Flexible */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  
+  /* Dimensiones */
+  min-height: calc(100vh - 80px); /* Ajusta según altura de NavBar */
+  
+  /* Espaciado */
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  
+  /* Estética */
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  color: var(--text-primary);
+  
+  /* Transiciones suaves */
+  transition: all var(--transition-base);
+  
+  /* Alineación de contenido */
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--spacing-2xl);
+}
+
+/* Contenedor máximo de ancho */
+.main-content > * {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Responsive - Tablets */
+@media (max-width: 768px) {
+  .main-content {
+    padding: var(--spacing-xl) var(--spacing-md);
+    min-height: calc(100vh - 70px);
+    gap: var(--spacing-xl);
+  }
+}
+
+/* Responsive - Móviles */
+@media (max-width: 480px) {
+  .main-content {
+    padding: var(--spacing-lg) var(--spacing-md);
+    min-height: calc(100vh - 60px);
+    gap: var(--spacing-lg);
+  }
+}

@@ -1,0 +1,171 @@
+/* ==================== NAVBAR PRINCIPAL ==================== */
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  box-shadow: var(--shadow-lg);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  gap: var(--spacing-lg);
+  min-height: 80px;
+  transition: all var(--transition-base);
+}
+
+/* ==================== BRAND/LOGO ==================== */
+.navbarBrand {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: white;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.navbarBrand a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all var(--transition-fast);
+}
+
+.navbarBrand:hover,
+.navbarBrand a:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.navbarBrand:active,
+.navbarBrand a:active {
+  transform: scale(0.98);
+}
+
+/* ==================== ENLACES ==================== */
+.navbarLinks {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-lg);
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.navbarLinks a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  position: relative;
+  white-space: nowrap;
+}
+
+.navbarLinks a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: width var(--transition-fast);
+}
+
+.navbarLinks a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.navbarLinks a:hover::after {
+  width: 100%;
+}
+
+.navbarLinks a:active {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(0);
+}
+
+.navbarLinks a:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+/* Tablets */
+@media (max-width: 768px) {
+  .navbar {
+    padding: var(--spacing-md);
+    flex-direction: row;
+    gap: var(--spacing-md);
+    min-height: 70px;
+  }
+
+  .navbarBrand {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-xl);
+  }
+
+  .navbarLinks {
+    gap: var(--spacing-md);
+  }
+
+  .navbarLinks a {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+  .navbar {
+    padding: var(--spacing-sm) var(--spacing-md);
+    gap: var(--spacing-sm);
+    min-height: 60px;
+    flex-wrap: wrap;
+  }
+
+  .navbarBrand {
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-lg);
+  }
+
+  .navbarBrand a {
+    padding: 0;
+  }
+
+  .navbarLinks {
+    gap: var(--spacing-sm);
+    width: 100%;
+    order: 3;
+    justify-content: flex-start;
+  }
+
+  .navbarLinks a {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* Teléfonos muy pequeños */
+@media (max-width: 360px) {
+  .navbar {
+    min-height: 55px;
+  }
+
+  .navbarBrand {
+    font-size: var(--font-size-base);
+  }
+
+  .navbarLinks a {
+    padding: var(--spacing-xs) var(--spacing-xs);
+    font-size: var(--font-size-xs);
+  }
+}

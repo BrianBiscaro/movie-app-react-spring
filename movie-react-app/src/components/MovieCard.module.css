@@ -1,0 +1,204 @@
+/* ==================== TARJETA PRINCIPAL ==================== */
+.movieCard {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  height: 100%;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.movieCard:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.movieCard:active {
+  transform: translateY(-4px);
+}
+
+/* ==================== CARTEL/POSTER ==================== */
+.moviePoster {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background-color: var(--bg-tertiary);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.moviePoster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform var(--transition-base);
+}
+
+.movieCard:hover .moviePoster img {
+  transform: scale(1.08);
+}
+
+/* ==================== OVERLAY (OSCURO AL PASAR MOUSE) ==================== */
+.movieOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  backdrop-filter: blur(2px);
+}
+
+.movieCard:hover .movieOverlay {
+  opacity: 1;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+/* ==================== BOTÓN FAVORITO ==================== */
+.favoriteBtn {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  opacity: 0;
+}
+
+/* BOTÓN FAVORITO - VISIBLE AL HOVER */
+.movieCard:hover .favoriteBtn {
+  opacity: 1;
+}
+
+/* BOTÓN FAVORITO - VARIANTE ACTIVO (MARCADO) */
+.favoriteBtnActive {
+  background-color: #e91e63;
+}
+
+.favoriteBtnActive:hover {
+  background-color: #8a133b;
+}
+
+/* BOTÓN FAVORITO - VARIANTE INACTIVO */
+.favoriteBtnInactive {
+  background-color:  #ffffff;
+}
+
+.favoriteBtnInactive:hover {
+  background-color: #6d6d6d;
+}
+
+.favoriteBtn:hover {
+  background-color: var(--secondary-light);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-xl);
+}
+
+.favoriteBtn:active {
+  transform: scale(0.98);
+}
+
+.favoriteBtn:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* ==================== INFORMACIÓN ==================== */
+.movieInfo {
+  padding: var(--spacing-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--bg-secondary);
+}
+
+.movieInfo h3 {
+  font-size: var(--font-size-base);
+  margin: 0 0 var(--spacing-sm) 0;
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.movieInfo p {
+  font-size: var(--font-size-sm);
+  margin: 0;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+/* ==================== ANIMACIÓN ==================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+/* Tablets */
+@media (max-width: 768px) {
+  .movieCard {
+    border-radius: var(--radius-md);
+  }
+
+  .movieInfo {
+    padding: var(--spacing-sm);
+  }
+
+  .movieInfo h3 {
+    font-size: var(--font-size-sm);
+  }
+
+  .favoriteBtn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+  .movieCard:hover {
+    transform: none;
+  }
+
+  .movieCard:hover .moviePoster img {
+    transform: none;
+  }
+
+  .movieOverlay {
+    opacity: 1;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+  }
+
+  .favoriteBtn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+}
