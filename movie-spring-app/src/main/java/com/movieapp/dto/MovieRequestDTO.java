@@ -11,6 +11,6 @@ import java.time.LocalDate;
 public class MovieRequestDTO {
     private String externalId;
     private String title;
-    private LocalDate release_date;
-    private String poster_path;
+    private LocalDate releaseDate;
+    private String posterPath;
 }

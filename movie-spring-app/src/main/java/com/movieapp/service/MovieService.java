@@ -1,17 +1,17 @@
 package com.movieapp.service;
 
-
 import com.movieapp.dto.MovieRequestDTO;
 import com.movieapp.dto.MovieResponseDTO;
 import com.movieapp.mapper.Mapper;
 import com.movieapp.model.Movie;
 import com.movieapp.repository.MovieRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -41,25 +41,27 @@ public class MovieService implements IMovieService {
 
         Movie newMovie = Mapper.toEntity(movie);
 
-        movieRepository.save(newMovie);
+        Movie savedMovie= movieRepository.save(newMovie);
 
-        return Mapper.toDTO(newMovie);
+        return Mapper.toDTO(savedMovie);
     }
 
+
     @Override
-    public MovieResponseDTO update(Long id, MovieRequestDTO movie) {
+    @Transactional
+    public MovieResponseDTO update(Long id, MovieRequestDTO movieDTO) {
 
-        Movie updatedMovie = movieRepository.findById(id)
-                .orElseThrow(RuntimeException::new);
+        Movie movieEntity = movieRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Movie not found with id: " + id));
 
-        updatedMovie.setExternalId(movie.getExternalId());
-        updatedMovie.setTitle(movie.getTitle());
-        updatedMovie.setPoster_path(movie.getPoster_path());
-        updatedMovie.setRelease_date(movie.getRelease_date());
+        movieEntity.setExternalId(movieDTO.getExternalId());
+        movieEntity.setTitle(movieDTO.getTitle());
+        movieEntity.setPosterPath(movieDTO.getPosterPath());
+        movieEntity.setReleaseDate(movieDTO.getReleaseDate());
 
-        movieRepository.save(updatedMovie);
+        movieRepository.save(movieEntity);
 
-        return Mapper.toDTO(updatedMovie);
+        return Mapper.toDTO(movieEntity);
     }
 
     @Override

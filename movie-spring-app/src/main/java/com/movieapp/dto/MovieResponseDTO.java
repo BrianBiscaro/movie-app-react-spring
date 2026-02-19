@@ -11,6 +11,6 @@ public class MovieResponseDTO {
     private Long id;
     private String externalId;
     private String title;
-    private LocalDate relase_date;
-    private String poster_path;
+    private LocalDate relaseDate;
+    private String posterPath;
 }

@@ -14,8 +14,8 @@ public class Mapper {
                 .id(movie.getId())
                 .externalId(movie.getExternalId())
                 .title(movie.getTitle())
-                .poster_path(movie.getPoster_path())
-                .relase_date(movie.getRelease_date())
+                .posterPath(movie.getPosterPath())
+                .relaseDate(movie.getReleaseDate())
                 .build();
     }
 
@@ -32,8 +32,8 @@ public class Mapper {
         return Movie.builder()
                 .title(movie.getTitle())
                 .externalId(movie.getExternalId())
-                .poster_path(movie.getPoster_path())
-                .release_date(movie.getRelease_date())
+                .posterPath(movie.getPosterPath())
+                .releaseDate(movie.getReleaseDate())
                 .build();
     }
 

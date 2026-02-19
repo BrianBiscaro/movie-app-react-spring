@@ -2,13 +2,11 @@ package com.movieapp.controller;
 
 import com.movieapp.dto.MovieRequestDTO;
 import com.movieapp.dto.MovieResponseDTO;
-import com.movieapp.model.Movie;
-import com.movieapp.service.MovieService;
+import com.movieapp.service.IMovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -18,7 +16,8 @@ import java.util.List;
 @RequestMapping("/api/movies")
 public class MovieController {
 
-    final MovieService movieService;
+    final IMovieService movieService;
+
     @GetMapping
     public ResponseEntity<List<MovieResponseDTO>> getMovies(){
         return ResponseEntity.ok(movieService.get());
@@ -29,7 +28,7 @@ public class MovieController {
         return ResponseEntity.ok(movieService.get(id));
     }
 
-    @PostMapping("/{id")
+    @PostMapping("/{id}")
     public ResponseEntity<MovieResponseDTO> createMovie(@RequestBody MovieRequestDTO movie){
 
         MovieResponseDTO createdMovie = movieService.save(movie);
@@ -43,23 +42,20 @@ public class MovieController {
                 .body(createdMovie);
     }
 
-    @PutMapping("/{id")
+    @PutMapping("/{id}")
     public ResponseEntity<MovieResponseDTO> updateMovie(@PathVariable Long id, @RequestBody MovieRequestDTO movie){
 
-        MovieResponseDTO updatedMovie = movieService.update(id, movie);
+            MovieResponseDTO updatedMovie = movieService.update(id, movie);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(updatedMovie.getId())
-                .toUri();
+            return ResponseEntity.ok(updatedMovie);
 
-        return ResponseEntity.created(location)
-                .body(updatedMovie);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteMovie(@PathVariable Long id){
-        movieService.delete(id);
-    }
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
 
+        movieService.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }
