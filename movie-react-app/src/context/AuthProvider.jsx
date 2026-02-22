@@ -14,20 +14,28 @@ export const AuthProvider = ({ children }) => {
 
 
     const login = async (credentials) => {
-        setLoading(true);
         try {
+
             const data = await loginService(credentials);
+
+
+            const userData = {
+                username: data.username,
+                email: data.email
+            };
+
             localStorage.setItem('jwt_token', data.token);
-            localStorage.setItem('user_data', JSON.stringify(data.user));
-            setUser(data.user);
+            localStorage.setItem('user_data', JSON.stringify(userData));
+
+
+            setUser(userData);
+
             return true;
         } catch (error) {
-            console.error("Error en Login: ", error);
+            console.error("Error en login:", error);
             return false;
-        } finally {
-            setLoading(false);
         }
-    }
+    };
     const logout = () => {
         localStorage.removeItem('jwt_token');
         localStorage.removeItem('user_data');

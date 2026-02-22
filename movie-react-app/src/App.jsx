@@ -1,9 +1,12 @@
 import './App.css'
 import Home from "./pages/Home"
 import Favorites from './pages/Favorites'
+import Login from './pages/Login'
+import Register from './pages/Register'
 import { Route, Routes } from 'react-router-dom'
 import { MovieProvider } from './context/MovieProvider'
 import ProtectedRoute from './components/auth/ProtectedRoute'
+import { AuthProvider } from './context/AuthProvider'
 
 function App() {
   return (
@@ -18,6 +21,7 @@ function App() {
 
             <Route element={<ProtectedRoute />}>
               <Route path='/' element={<Home />} />
+              <Route path='/home' element={<Home />} />
               <Route path='/favorites' element={<Favorites />} />
             </Route>
           </Routes>

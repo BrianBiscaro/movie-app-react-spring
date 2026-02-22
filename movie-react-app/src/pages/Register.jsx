@@ -94,7 +94,7 @@ const Register = () => {
                     <label>Confirmar Contraseña</label>
                     <input
                         type="password"
-                        name="confirmPassword"
+                        name="confirmpassword"
                         value={formData.confirmpassword}
                         onChange={handleChange}
                         required

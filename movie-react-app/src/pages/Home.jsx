@@ -1,4 +1,3 @@
-import SearchForm from "../components/SearchForm";
 import { MovieGrid } from "../components/MovieGrid";
 import { useMovieContext } from "../hooks/useMovieContext";
 import Footer from "../layouts/Footer";

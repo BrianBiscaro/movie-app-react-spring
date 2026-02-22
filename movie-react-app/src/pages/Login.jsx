@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 const Login = () => {
@@ -53,6 +53,8 @@ const Login = () => {
                     Entrar
                 </button>
             </form>
+
+            <p>Si no tienes una cuenta, <Link to="/register"> Registrate aquí </Link></p>
         </div>
     );
 };
