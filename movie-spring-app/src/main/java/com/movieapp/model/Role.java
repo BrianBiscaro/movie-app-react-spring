@@ -1,4 +1,4 @@
-package com.movieapp.user;
+package com.movieapp.model;
 
 public enum Role
 {

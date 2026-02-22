@@ -1,10 +1,13 @@
 package com.movieapp.auth;
 
 
+import com.movieapp.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -12,8 +15,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegisterRequest {
     private String username;
+    private String name;
+    private String email;
+    private Role role;
     private String password;
-    private String firstname;
-    private String lastname;
-    private String country;
+    private LocalDate birthday;
+
+
 }

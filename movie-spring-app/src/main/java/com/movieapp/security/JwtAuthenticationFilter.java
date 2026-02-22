@@ -1,6 +1,5 @@
-package com.movieapp.jwt;
+package com.movieapp.security;
 
-import com.movieapp.security.JwtTokenProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
