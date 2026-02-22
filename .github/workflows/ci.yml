@@ -1,0 +1,54 @@
+name: Movie App CI Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-backend:
+    name: Build Spring Boot
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./movie-spring-app
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    - name: Configurar Java 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Compilar con Maven
+      run: mvn clean package -DskipTests
+
+ 
+  build-frontend:
+    name: Build React Vite
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./movie-react-app
+    
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    - name: Configurar Node.js 20
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: './movie-react-app/package-lock.json'
+
+    - name: Instalar dependencias
+      run: npm ci
+
+    - name: Construir aplicación
+      run: npm run build
