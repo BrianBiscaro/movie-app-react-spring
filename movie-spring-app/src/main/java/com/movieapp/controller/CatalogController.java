@@ -15,7 +15,6 @@ public class CatalogController {
         this.externalMovieService = externalMovieService;
     }
 
-    // GET /api/catalog/popular?page=0
     @GetMapping("/popular")
     public ResponseEntity<ExternalApiMoviePageResponseDTO> getPopularMovies(
             @RequestParam(defaultValue = "0") int page) {
