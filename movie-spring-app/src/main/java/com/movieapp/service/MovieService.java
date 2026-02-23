@@ -7,6 +7,8 @@ import com.movieapp.model.Movie;
 import com.movieapp.repository.MovieRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,12 @@ public class MovieService implements IMovieService {
     }
 
     @Override
+    public Page<MovieResponseDTO> getMovies(Pageable pageable){
+        return movieRepository.findAll(pageable)
+                .map(Mapper::toDTO);
+    }
+
+                                            @Override
     public MovieResponseDTO get(Long id) {
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
