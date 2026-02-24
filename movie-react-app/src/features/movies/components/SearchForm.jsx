@@ -1,4 +1,4 @@
-import { useMovieContext } from "../hooks/useMovieContext";
+import { useMovieContext } from "../features/movies/hooks/useMovieContext";
 
 const SearchForm = () => {
     const { searchQuery, setSearchQuery, handleSearch, loading } = useMovieContext();

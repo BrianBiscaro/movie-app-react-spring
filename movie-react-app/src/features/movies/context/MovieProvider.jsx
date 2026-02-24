@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { MovieContext } from './MovieContext'
-import { getPopularMovies, searchMovies } from '../services/api'
+import { getPopularMovies, searchMovies } from '../services/externalApiMovieService'
 
 export const MovieProvider = ({ children }) => {
 

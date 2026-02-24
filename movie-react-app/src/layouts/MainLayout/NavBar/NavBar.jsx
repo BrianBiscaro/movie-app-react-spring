@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './NavBar.module.css'
-import SearchForm from '../SearchForm';
-import { useAuth } from '../../hooks/useAuth';
+import SearchForm from '../../../components/SearchForm';
+import { useAuth } from '../../../features/auth/hooks/useAuth';
 
 const NavBar = () => {
 

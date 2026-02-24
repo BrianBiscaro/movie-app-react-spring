@@ -1,4 +1,4 @@
-import NavBar from "../components/layout/NavBar";
+import NavBar from "./NavBar/NavBar";
 
 const Header = () => {
 

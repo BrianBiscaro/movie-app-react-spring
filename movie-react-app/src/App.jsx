@@ -7,26 +7,30 @@ import { Route, Routes } from 'react-router-dom'
 import { MovieProvider } from './context/MovieProvider'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 import { AuthProvider } from './context/AuthProvider'
+import { UserProvider } from './context/UserProvider'
 
 function App() {
   return (
     <AuthProvider>
       <MovieProvider>
-        <main className='main-content'>
+        <UserProvider>
+          <main className='main-content'>
 
-          <Routes>
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
+            <Routes>
+              <Route path='/' element={<Login />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
 
 
-            <Route element={<ProtectedRoute />}>
-              <Route path='/' element={<Home />} />
-              <Route path='/home' element={<Home />} />
-              <Route path='/favorites' element={<Favorites />} />
-            </Route>
-          </Routes>
+              <Route element={<ProtectedRoute />}>
+                <Route path='/' element={<Home />} />
+                <Route path='/home' element={<Home />} />
+                <Route path='/favorites' element={<Favorites />} />
+              </Route>
+            </Routes>
 
-        </main>
+          </main>
+        </UserProvider>
       </MovieProvider>
     </AuthProvider>
   )
