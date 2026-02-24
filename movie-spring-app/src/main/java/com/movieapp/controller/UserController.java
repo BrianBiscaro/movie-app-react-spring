@@ -24,18 +24,18 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<Page<UserResponseDTO>> getUsers(Pageable pageable){
-        return ResponseEntity.ok(userService.get());
+        return ResponseEntity.ok(userService.getUsers(pageable));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> getUser(@PathVariable Long id){
-        return ResponseEntity.ok(userService.get(id));
+        return ResponseEntity.ok(userService.getUser(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id, @RequestBody UserRequestDTO userDTO){
 
-        UserResponseDTO updatedUser = userService.update(id, userDTO);
+        UserResponseDTO updatedUser = userService.updateUser(id, userDTO);
 
         return ResponseEntity.ok(updatedUser);
     }
@@ -43,7 +43,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
 
-        userService.delete(id);
+        userService.deleteUser(id);
 
         return ResponseEntity.noContent().build();
     }
@@ -62,7 +62,7 @@ public class UserController {
     @PostMapping("/{id}/favorites")
     public ResponseEntity<Void> deleteFavoriteMovie(
             @PathVariable Long id,
-            @RequestBody Long movieExternalID
+            @RequestBody String movieExternalID
     ){
         userService.deleteFavoriteMovie(id, movieExternalID);
 

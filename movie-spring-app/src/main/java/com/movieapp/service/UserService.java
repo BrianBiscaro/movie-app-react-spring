@@ -10,6 +10,8 @@ import com.movieapp.repository.MovieRepository;
 import com.movieapp.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,39 +25,25 @@ public class UserService implements IUserService {
 
     private final UserRepository userRepository;
     private final MovieRepository movieRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public List<UserResponseDTO> get() {
-        return userRepository.findAll()
-                .stream()
-                .map(Mapper::toDTO)
-                .toList();
+    public Page<UserResponseDTO> getUsers(Pageable pageable) {
+        return userRepository.findAll(pageable)
+                .map(Mapper::toDTO);
     }
 
     @Override
-    public UserResponseDTO get(Long id) {
+    public UserResponseDTO getUser(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
 
         return Mapper.toDTO(user);
     }
 
-    @Override
-    public UserResponseDTO save(UserRequestDTO user) {
-
-        User newUser = Mapper.toEntity(user);
-
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-
-        User savedUser = userRepository.save(newUser);
-
-        return Mapper.toDTO(savedUser);
-    }
 
     @Override
     @Transactional
-    public UserResponseDTO update(Long id, UserRequestDTO user) {
+    public UserResponseDTO updateUser(Long id, UserRequestDTO user) {
 
         User userEntity = userRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
@@ -71,7 +59,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 
@@ -85,7 +73,6 @@ public class UserService implements IUserService {
 
         Movie movieEntity = movieRepository.findByExternalId(movieDTO.getExternalId())
                 .orElseGet(() -> {
-
                     Movie newMovie = Mapper.toEntity(movieDTO);
                     return movieRepository.save(newMovie);
                 });
@@ -93,7 +80,18 @@ public class UserService implements IUserService {
 
         user.addFavoriteMovie(movieEntity);
 
+    }
 
-        userRepository.save(user);
+    @Override
+    @Transactional
+    public void deleteFavoriteMovie(Long userId, String movieExternalID){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
+
+        Movie movie = movieRepository.findByExternalId(movieExternalID)
+                .orElseThrow(() -> new EntityNotFoundException("Película no encontrada"));
+
+        user.deleteFavoriteMovie(movie);
+
     }
 }
