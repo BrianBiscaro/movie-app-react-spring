@@ -5,6 +5,8 @@ import com.movieapp.dto.UserRequestDTO;
 import com.movieapp.dto.UserResponseDTO;
 import com.movieapp.service.IUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,35 +23,13 @@ public class UserController {
     private final IUserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserResponseDTO>> getUsers(){
+    public ResponseEntity<Page<UserResponseDTO>> getUsers(Pageable pageable){
         return ResponseEntity.ok(userService.get());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> getUser(@PathVariable Long id){
         return ResponseEntity.ok(userService.get(id));
-    }
-
-    @PostMapping("/{id}")
-    ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO userDTO){
-
-        UserResponseDTO createdUser = userService.save(userDTO);
-
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(createdUser.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).body(createdUser);
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<UserResponseDTO> newUser(@RequestBody UserRequestDTO user){
-
-        UserResponseDTO createdUser = userService.save(user);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
     @PutMapping("/{id}")
@@ -77,5 +57,15 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Película agregada a favoritos exitosamente");
+    }
+
+    @PostMapping("/{id}/favorites")
+    public ResponseEntity<Void> deleteFavoriteMovie(
+            @PathVariable Long id,
+            @RequestBody Long movieExternalID
+    ){
+        userService.deleteFavoriteMovie(id, movieExternalID);
+
+        return ResponseEntity.noContent().build();
     }
 }
