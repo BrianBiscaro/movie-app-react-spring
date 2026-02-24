@@ -1,10 +1,8 @@
 import api from "./axiosConfig";
 
-const BASE_URL = api.BASE_URL
-
 export const popularMoviesService = async () => {
 
-    const response = await api.get(`${BASE_URL}/catalog`)
+    const response = await api.get('/catalog')
     const data = await response.json();
 
     return data.results;
@@ -12,7 +10,7 @@ export const popularMoviesService = async () => {
 
 export const searchMoviesService = async (query) => {
 
-    const response = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`)
+    const response = await api.get(`/catalog/${query}`)
     const data = await response.json();
 
     return data.results;
