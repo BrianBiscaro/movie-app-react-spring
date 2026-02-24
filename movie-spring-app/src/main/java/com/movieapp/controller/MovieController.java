@@ -23,24 +23,19 @@ public class MovieController {
     final IMovieService movieService;
 
     @GetMapping
-    public ResponseEntity<List<MovieResponseDTO>> getMovies(){
-        return ResponseEntity.ok(movieService.get());
-    }
-
-    @GetMapping
     public ResponseEntity<Page<MovieResponseDTO>> getMovies(Pageable pageable) {
         return ResponseEntity.ok(movieService.getMovies(pageable));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MovieResponseDTO> getMovieById(@PathVariable Long id){
-        return ResponseEntity.ok(movieService.get(id));
+        return ResponseEntity.ok(movieService.getMovie(id));
     }
 
     @PostMapping("/{id}")
     public ResponseEntity<MovieResponseDTO> createMovie(@RequestBody MovieRequestDTO movie){
 
-        MovieResponseDTO createdMovie = movieService.save(movie);
+        MovieResponseDTO createdMovie = movieService.saveMovie(movie);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -54,7 +49,7 @@ public class MovieController {
     @PutMapping("/{id}")
     public ResponseEntity<MovieResponseDTO> updateMovie(@PathVariable Long id, @RequestBody MovieRequestDTO movie){
 
-            MovieResponseDTO updatedMovie = movieService.update(id, movie);
+            MovieResponseDTO updatedMovie = movieService.updateMovie(id, movie);
 
             return ResponseEntity.ok(updatedMovie);
 
