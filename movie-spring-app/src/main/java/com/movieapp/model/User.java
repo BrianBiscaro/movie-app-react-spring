@@ -36,6 +36,7 @@ public class User implements UserDetails {
     private LocalDate birthday;
     @Column(nullable = false)
     private String password;
+    @Builder.Default
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "user_favorite_movies",

@@ -30,6 +30,7 @@ public class Movie {
     private String posterPath;
     @ManyToMany(mappedBy = "favoriteMovies")
     @JsonIgnore
+    @Builder.Default
     private Set<User> usersThatFavorited = new HashSet<>();
 
 
