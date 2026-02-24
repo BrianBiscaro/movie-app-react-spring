@@ -1,6 +1,5 @@
 package com.movieapp.repository;
 
-import com.movieapp.dto.MovieResponseDTO;
 import com.movieapp.model.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 
