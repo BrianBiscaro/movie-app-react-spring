@@ -8,6 +8,7 @@ import { MovieProvider } from './context/MovieProvider'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 import { AuthProvider } from './context/AuthProvider'
 import { UserProvider } from './context/UserProvider'
+import { MainLayout } from './layouts/MainLayout/MainLayout'
 
 function App() {
   return (
@@ -22,8 +23,12 @@ function App() {
               <Route path='/register' element={<Register />} />
 
 
+              <Route element={<MainLayout />} />
+              <Route path='/' element={<Home />} />
+
+
               <Route element={<ProtectedRoute />}>
-                <Route path='/' element={<Home />} />
+                <Route path='/' element={<Home />} /> 
                 <Route path='/home' element={<Home />} />
                 <Route path='/favorites' element={<Favorites />} />
               </Route>
