@@ -2,18 +2,16 @@ package com.movieapp.controller;
 
 import com.movieapp.dto.MovieRequestDTO;
 import com.movieapp.dto.MovieResponseDTO;
-import com.movieapp.model.Movie;
 import com.movieapp.service.IMovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
+
 
 @RequiredArgsConstructor
 @RestController
