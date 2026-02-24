@@ -1,6 +1,7 @@
 import api from "./axiosConfig";
 
 const BASE_URL = api.BASE_URL
+
 export const popularMoviesService = async () => {
 
     const response = await api.get(`${BASE_URL}/catalog`)
