@@ -23,6 +23,7 @@ public class Movie {
     private Long id;
     @Column(name="external_id", unique = true, nullable = false)
     private String externalId;
+
     @Column(nullable = false)
     private String title;
     private LocalDate releaseDate;
@@ -30,6 +31,8 @@ public class Movie {
     @ManyToMany(mappedBy = "favoriteMovies")
     @JsonIgnore
     private Set<User> usersThatFavorited = new HashSet<>();
+
+
 
     @Override
     public boolean equals(Object o) {

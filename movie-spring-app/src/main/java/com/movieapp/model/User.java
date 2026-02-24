@@ -46,7 +46,12 @@ public class User implements UserDetails {
 
     public void addFavoriteMovie(Movie movie) {
         this.favoriteMovies.add(movie);
-        // si la relación fuera bidireccional: movie.getUsers().add(this);
+        movie.getUsersThatFavorited().add(this);
+    }
+
+    public void deleteFavoriteMovie(Movie movie){
+        this.favoriteMovies.remove(movie);
+        movie.getUsersThatFavorited().remove(this);
     }
 
     @Override
@@ -72,7 +77,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-
         return true;
     }
 
