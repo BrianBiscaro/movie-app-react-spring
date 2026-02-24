@@ -9,14 +9,9 @@ import java.util.List;
 
 public interface IMovieService {
 
-    List<MovieResponseDTO> get();
-
     Page<MovieResponseDTO> getMovies(Pageable pageable);
-    MovieResponseDTO get(Long id);
-
-    MovieResponseDTO save(MovieRequestDTO movie);
-
-    MovieResponseDTO update(Long id, MovieRequestDTO movie);
-
-    void delete(Long id);
+    MovieResponseDTO getMovie(Long id);
+    MovieResponseDTO saveMovie(MovieRequestDTO movie);
+    MovieResponseDTO updateMovie(Long id, MovieRequestDTO movie);
+    void deleteMovie(Long id);
 }

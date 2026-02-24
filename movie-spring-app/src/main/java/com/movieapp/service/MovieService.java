@@ -22,21 +22,13 @@ public class MovieService implements IMovieService {
     private final MovieRepository movieRepository;
 
     @Override
-    public List<MovieResponseDTO> get() {
-        return movieRepository.findAll()
-                .stream()
-                .map(Mapper::toDTO)
-                .toList();
-    }
-
-    @Override
     public Page<MovieResponseDTO> getMovies(Pageable pageable){
         return movieRepository.findAll(pageable)
                 .map(Mapper::toDTO);
     }
 
-                                            @Override
-    public MovieResponseDTO get(Long id) {
+    @Override
+    public MovieResponseDTO getMovie(Long id) {
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
 
@@ -45,7 +37,7 @@ public class MovieService implements IMovieService {
     }
 
     @Override
-    public MovieResponseDTO save(MovieRequestDTO movie) {
+    public MovieResponseDTO saveMovie(MovieRequestDTO movie) {
 
         Movie newMovie = Mapper.toEntity(movie);
 
@@ -57,7 +49,7 @@ public class MovieService implements IMovieService {
 
     @Override
     @Transactional
-    public MovieResponseDTO update(Long id, MovieRequestDTO movieDTO) {
+    public MovieResponseDTO updateMovie(Long id, MovieRequestDTO movieDTO) {
 
         Movie movieEntity = movieRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Movie not found with id: " + id));
@@ -73,7 +65,7 @@ public class MovieService implements IMovieService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteMovie(Long id) {
          movieRepository.deleteById(id);
     }
 
