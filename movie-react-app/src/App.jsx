@@ -3,6 +3,7 @@ import Home from "./pages/Home"
 import Favorites from './pages/Favorites'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Users from './pages/Users'
 import { Route, Routes } from 'react-router-dom'
 import { MovieProvider } from './context/MovieProvider'
 import ProtectedRoute from './components/auth/ProtectedRoute'
@@ -31,6 +32,7 @@ function App() {
                 <Route path='/' element={<Home />} /> 
                 <Route path='/home' element={<Home />} />
                 <Route path='/favorites' element={<Favorites />} />
+                <Route path='/users' element={<Users />} />
               </Route>
             </Routes>
 

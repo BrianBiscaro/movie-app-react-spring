@@ -1,5 +1,5 @@
-import { MovieGrid } from "../components/MovieGrid";
-import { useMovieContext } from "../hooks/useMovieContext";
+import { MovieGrid } from "../features/movies/components/MovieGrid";
+import { useMovieContext } from "../features/movies/hooks/useMovieContext";
 import Footer from "../layouts/Footer";
 import Header from "../layouts/Header";
 
