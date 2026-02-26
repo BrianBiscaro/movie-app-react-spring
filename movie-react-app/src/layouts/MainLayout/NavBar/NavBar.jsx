@@ -22,6 +22,7 @@ const NavBar = () => {
             <div className={styles.navbarLinks}>
                 <Link to="/">Home</Link>
                 <Link to="/favorites">Favorites</Link>
+                <Link to="/users">Users</Link>
                 <button onClick={handleLogout}>
                     <Link to="/login"> Cerrar Sesión </Link>
                 </button>
