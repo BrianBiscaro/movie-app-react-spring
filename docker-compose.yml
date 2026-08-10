@@ -1,9 +1,9 @@
-version: '3.8'
+version: "3.8"
 
 services:
   db:
     image: postgres:15-alpine
-    container_name: contenedor_movieSpringApp_db
+    container_name: contenedor_movieApp_db
     ports:
       - "${DB_PORT}:5432"
     environment:
@@ -16,7 +16,7 @@ services:
       - movie-network
 
   backend:
-    build: 
+    build:
       context: ./movie-spring-app
     container_name: movie-backend
     ports:
@@ -34,11 +34,11 @@ services:
       - movie-network
 
   frontend:
-    build: 
+    build:
       context: ./movie-react-app
     container_name: movie-frontend
     ports:
-      - "5173:80" 
+      - "5173:80"
     depends_on:
       - backend
     networks:
